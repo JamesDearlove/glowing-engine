@@ -15,16 +15,20 @@ def handle_webhooks(request: Request, event: str):
     address = os.environ.get("PI_ADDRESS")
 
     if event == "ping":
-        httpx.post(f"{address}/chaos")
+        r = httpx.post(f"{address}/chaos")
+        print(r)
     elif event == "pull_request":
-        httpx.post(f"{address}/pulse", 
-            data={"colors": [0x00FF50], "reverse": False})
+        r = httpx.post(f"{address}/pulse", 
+            json={"colors": [0x00FF50], "reverse": False})
+        print(r)
     elif event == "issue":
-        httpx.post(f"{address}/pulse", 
-            data={"colors": [0x0ebdf2], "reverse": False})
+        r = httpx.post(f"{address}/pulse", 
+            json={"colors": [0x0ebdf2], "reverse": False})
+        print(r)
     elif event == "push":
-        httpx.post(f"{address}/pulse", 
-            data={"colors": [0xFF0000], "reverse": False})
+        r = httpx.post(f"{address}/pulse", 
+            json={"colors": [0xFF0000], "reverse": False})
+        print(r)
 
 @app.get("/")
 async def root():
