@@ -7,11 +7,11 @@ authors = ["James Dearlove <jamesdearlove@outlook.com>"]
 [tool.poetry.dependencies]
 python = "^3.9"
 fastapi = "^0.81.0"
-python-dotenv = "^0.20.0"
 httpx = "^0.23.0"
+uvicorn = "^0.18.3"
 
 [tool.poetry.dev-dependencies]
-uvicorn = "^0.18.3"
+python-dotenv = "^0.20.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
