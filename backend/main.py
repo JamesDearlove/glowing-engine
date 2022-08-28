@@ -17,19 +17,20 @@ async def handle_webhooks(request: Request, event: str):
     address = os.environ.get("PI_ADDRESS")
 
     if event == "ping":
-        r = httpx.post(f"{address}/chaos")
+        httpx.post(f"{address}/chaos")
+
     elif event.startswith("pull_request"):
-        r = httpx.post(f"{address}/pulse", 
-            json={"colors": [0x00FF50], "reverse": False})
+        httpx.post(f"{address}/pulse", json={"colors": [0x00FF50], "reverse": False})
+        httpx.post(f"{address}/pulse", json={"colors": [0x00FF50], "reverse": True})
+
     elif event.startswith("issues"):
-
         if body["action"] == "closed":
-            r = httpx.post(f"{address}/pulse", 
-                json={"colors": [0x72ff72, 0x00FF00, 0x72ff72], "reverse": False})
+            httpx.post(f"{address}/pulse", json={"colors": [0x72ff72, 0x00FF00, 0x72ff72], "reverse": False})
+            httpx.post(f"{address}/pulse", json={"colors": [0x72ff72, 0x00FF00, 0x72ff72], "reverse": True})
+        
         elif body["action"] == "opened":
-            r = httpx.post(f"{address}/pulse", 
-                json={"colors": [0x0050c9, 0x0ebdf2, 0x0050c9], "reverse": False})
-
+            httpx.post(f"{address}/pulse", json={"colors": [0x0050c9, 0x0ebdf2, 0x0050c9], "reverse": False})
+            httpx.post(f"{address}/pulse", json={"colors": [0x0050c9, 0x0ebdf2, 0x0050c9], "reverse": True})
 
     elif event == "push":
         httpx.post(f"{address}/pulse", json={"colors": [0xff7572, 0xFF0000, 0xff7572], "reverse": False})
