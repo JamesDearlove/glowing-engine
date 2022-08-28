@@ -32,8 +32,8 @@ async def handle_webhooks(request: Request, event: str):
 
 
     elif event == "push":
-        r = httpx.post(f"{address}/pulse", 
-            json={"colors": [0xff7572, 0xFF0000, 0xff7572], "reverse": False})
+        httpx.post(f"{address}/pulse", json={"colors": [0xff7572, 0xFF0000, 0xff7572], "reverse": False})
+        httpx.post(f"{address}/pulse", json={"colors": [0xff7572, 0xFF0000, 0xff7572], "reverse": True})
 
 @app.get("/")
 async def root():
